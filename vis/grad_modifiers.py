@@ -1,8 +1,7 @@
 from __future__ import absolute_import
 
 import numpy as np
-from keras import backend as K
-from .utils import utils
+from tensorflow.keras import backend as K
 
 
 def negate(grads):
@@ -64,7 +63,3 @@ def small_values(grads):
         The modified gradients that highlight small values.
     """
     return absolute(invert(grads))
-
-
-def get(identifier):
-    return utils.get_identifier(identifier, globals(), __name__)

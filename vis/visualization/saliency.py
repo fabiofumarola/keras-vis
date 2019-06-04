@@ -4,9 +4,10 @@ import numpy as np
 from scipy.ndimage.interpolation import zoom
 
 from keras.layers.convolutional import _Conv
+from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from keras.layers.pooling import _Pooling1D, _Pooling2D, _Pooling3D
 from keras.layers.wrappers import Wrapper
-from keras import backend as K
+from tensorflow.keras import backend as K
 
 from ..losses import ActivationMaximization
 from ..optimizer import Optimizer
@@ -27,10 +28,10 @@ def _find_penultimate_layer(model, layer_idx, penultimate_layer_idx):
         The penultimate layer.
     """
     if penultimate_layer_idx is None:
-        for idx, layer in utils.reverse_enumerate(model.layers[:layer_idx - 1]):
+        for idx, layer in utils.reverse_enumerate(model.layers[:layer_idx]):
             if isinstance(layer, Wrapper):
                 layer = layer.layer
-            if isinstance(layer, (_Conv, _Pooling1D, _Pooling2D, _Pooling3D)):
+            if isinstance(layer, (_Conv, _Pooling1D, _Pooling2D, _Pooling3D, Conv2D, MaxPooling2D)):
                 penultimate_layer_idx = idx
                 break
 
