@@ -131,8 +131,8 @@ class Optimizer(object):
         """
         seed_input = self._get_seed_input(seed_input)
         input_modifiers = input_modifiers or []
-        grad_modifier = _identity if grad_modifier is None else get(grad_modifier)
-
+        # grad_modifier = _identity if grad_modifier is None else get(grad_modifier)
+        grad_modifier = _identity
         callbacks = callbacks or []
         if verbose:
             callbacks.append(_PRINT_CALLBACK)
